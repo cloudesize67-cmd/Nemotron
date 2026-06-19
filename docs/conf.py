@@ -23,6 +23,7 @@
 import os
 import shutil
 import sys
+from importlib.util import find_spec
 from pathlib import Path
 
 sys.path.insert(0, os.path.abspath("_ext"))
@@ -49,8 +50,10 @@ extensions = [
     "sphinx_design",  # For grid cards and other design elements
     "sphinxcontrib.mermaid",  # For mermaid diagrams
     "nemotron_customize",
-    "sphinx_reredirects",
 ]
+
+if find_spec("sphinx_reredirects") is not None:
+    extensions.append("sphinx_reredirects")
 
 templates_path = ["_templates"]
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store", "customize"]
