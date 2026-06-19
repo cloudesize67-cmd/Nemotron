@@ -66,10 +66,10 @@ from megatron.bridge.training.utils.omegaconf_utils import (
     create_omegaconf_dict_config,
     parse_hydra_overrides,
 )
-from omegaconf import OmegaConf
+from omegaconf import DictConfig, OmegaConf
 
-from nemotron.kit.recipe_loader import extract_recipe_config, import_recipe_function
 from nemo_runspec.artifacts import setup_artifact_tracking
+from nemotron.kit.recipe_loader import extract_recipe_config, import_recipe_function
 from nemotron.kit.train_script import load_omegaconf_yaml, parse_config_and_overrides
 from nemotron.kit.wandb_kit import (
     patch_checkpoint_logging_both,
@@ -90,11 +90,11 @@ DEFAULT_RECIPE_TARGET = (
 )
 
 
-RecipeBuilder = Callable[["DictConfig"], ConfigContainer]
+RecipeBuilder = Callable[[DictConfig], ConfigContainer]
 """Signature for a function that builds a ConfigContainer from a loaded config."""
 
 
-def _default_recipe_builder(config: "DictConfig") -> ConfigContainer:
+def _default_recipe_builder(config: DictConfig) -> ConfigContainer:
     """Build recipe from YAML ``recipe._target_`` (production path).
 
     The ``data`` YAML section contains recipe-function parameters (e.g.
