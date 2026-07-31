@@ -1,0 +1,4 @@
+__pycache__/
+*.pyc
+bmv_evolve_out/
+.pytest_cache/
